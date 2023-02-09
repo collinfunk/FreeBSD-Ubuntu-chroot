@@ -49,12 +49,12 @@ start_ubuntu() {
 }
 
 install_debootstrap() {
-	if [ -f /usr/local/sbin/debootstrap ] ; then
+	if ! [ -f /usr/local/sbin/debootstrap ] ; then
 		pkg install debootstrap
 	fi
 	
 	# Debootstrap doesn't download as executable for some reason
-	if [ -x /usr/local/sbin/debootstrap ] ; then
+	if ! [ -x /usr/local/sbin/debootstrap ] ; then
 		chmod +x /usr/local/sbin/debootstrap
 	fi
 }
