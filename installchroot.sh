@@ -21,6 +21,14 @@ if [ $(id -u) -ne 0 ] ; then
 	exit 1
 fi
 
+if [ "$(sysctl -n compat.linux.emul_path)" != "$CHROOT_PATH" ] ; then
+	echo "Make sure 'sysctl compat.linux.emul_path' is the same as the "
+	echo "folder where this script is installing to."
+	echo "compat.linux.emul_path = $(sysctl -n compat.linux.emul_path)"
+	echo "CHROOT_PATH = $CHROOT_PATH"
+	exit 1
+fi
+
 create_chroot_paths() {
 	if [ ! -d $CHROOT_PATH ] ; then
 		mkdir $CHROOT_PATH
